@@ -51,7 +51,7 @@
             <!--s.coveney@sheffield.ac.uk</br> -->
             <p>
                     2015-2017</br>
-                    Emulation of expensive simulators with Gaussian processes</br>
+                    Emulation (surrogate modeling) of time-expensive simulators</br>
                     Department of Physics and Astronomy &middot; University of Sheffield
             </p>
         </small>
@@ -73,6 +73,125 @@
     </section>
     }}}-->
 
+    <!--{{{ Outline -->
+    <section>
+        <h3>Outline</h3>
+           
+        <ol>
+            <li>Emulation of expensive simulations</li>
+            <li>Random fields on manifolds
+                <ul>
+                    <li>Electrical activation on left atria</li>
+                    <li>Gaussian processes on manifolds</li>
+                </ul>
+            </li>
+            <li>Cardiac Diffusion Tensor Imaging</li>
+        </ol>
+
+    <!--
+    <p>
+        <br>
+        (Work not necessarily performed in this order)
+    </p>
+    -->
+
+    </section>
+    <!--}}}-->
+
+</section>
+<!--}}}-->
+
+
+<!--{{{ Emulation of expensive simulations -->
+<section>
+
+    <!--{{{ Section title -->
+    <section>
+        <h2>Emulators of expensive simulations</h2>
+
+        <p>Learn mappings from simulator inputs to outputs</p>
+
+    </section>
+    <!--}}}-->
+
+    <!--{{{ Emulators for fitting cell models -->
+    <section>
+        <h3>Emulators for fitting cell models</h3>
+
+        <p>
+            Simulations of cardiac action potentials (APs)
+            <br>
+            Gaussian process emulators
+            <br>
+            INPUTS: parameters; OUTPUTS: AP features
+        </p>
+           
+        <figure>
+            <img style="margin: 0; width: 44%; height: auto; float: left" src="figures/matchAP.png">
+            <img style="margin: 0; width: 45%; height: auto; float: right" src="figures/impsAP.png">
+            <!-- <figcaption style="line-height: 1.0; font-size: 0.75em" >Application of Uncertainty Quantification to cardiac cell models</figcaption> -->
+        </figure>
+
+    </section>
+    <!--}}}-->
+
+    <!--{{{ RCE Surrogates: PCA-->
+    <section>
+        <h3>RCE: restitution curve emulators</h3>
+
+        <p>
+            Resitution curve simulations with openCARP
+            <br>
+            PCA + GPs: multi-output emulators
+            <br>
+            INPUTS: parameters; OUTPUTS: restitution curves
+        </p>
+
+        <figure>
+            <img style="margin: 0; width: 45%; height: auto; float: left" src="figures/restitution_curves.jpg">
+            <img style="margin: 0; width: 40%; height: auto; float: right" src="figures/RC_PCA.jpg">
+        </figure>
+
+    </section>
+    <!--}}}-->
+
+    <!--{{{ RCE Surrogates: inference -->
+    <section>
+        <h3>RCE: restitution curve emulators</h3>
+
+        <p>
+            Bayesian Calibration with emulators
+            <br>
+            Inference with no extra simulations
+        </p>
+
+        <figure>
+            <img style="margin: 0; width: 55%; height: auto; float: left" src="figures/RCE_samples.jpg">
+            <img style="margin: 0; width: 40%; height: auto; float: right" src="figures/RCE_posterior.jpg">
+        </figure>
+
+    </section>
+    <!--}}}-->
+
+    <!--{{{ ERP Surrogate -->
+    <section>
+        <h3>Use emulators to discover new protocols</h3>
+        <!-- <h3>Calibrating cardiac electrophysiology models using latent Gaussian processes on atrial manifolds</h3> -->
+
+        <p>
+            Investigate parameter identifiability with emulators
+            <br>
+            More on these ERP emulators later...
+        </p>
+
+        <figure>
+            <img style="margin: 0; width: 50%; height: auto; float: left" src="figures/ERP_sensitivity.png">
+            <img style="margin: 0; width: 48%; height: auto; float: right" src="figures/ERP_surrogates.png">
+        </figure>
+
+    </section>
+    <!--}}}-->
+
 </section>
 <!--}}}-->
 
@@ -82,7 +201,9 @@
 
     <!--{{{ LAT maps: intro-->
     <section>
-        <h2>Activation maps</h2>
+        <h2>Random fields on Manifolds</h2>
+
+        <h4>Part 1</h4>
 
         <p>Mapping electrical activation in the left atrium</p>
 
@@ -93,9 +214,19 @@
     <section>
         <h3>Catheter Measurements</h3>
 
+        <p>
+            Measure electrograms (voltage-time) in left atrium
+            <br>
+            Determine Local Activation Time (LAT)
+            <br>
+            (time of arrival of electrical wavefront)
+        </p>
+
         <figure>
-            <img style="margin: 0; width: 100%; height: auto" src="figures/egm+mesh.png">
+            <img style="margin: 0; width: 80%; height: auto" src="figures/egm+mesh.png">
+            <!--
             <figcaption style="line-height: 1.0; font-size: 0.75em" >Measure <b>electrograms</b> (voltage vs. time) across the left atrium</br>Determine <b>Local Activation Time (LAT)</b></figcaption>
+            -->
         </figure>
 
     </section>
@@ -116,25 +247,32 @@
 
     <!--{{{ Electrogram analysis summary gif -->
     <section>
-        <h3>Uncertainty & Morphology</h3>
+        <h3>LAT Uncertainty</h3>
     
+        <p>
+            Method to assign error variance for LAT
+        </p>
+
         <figure>
             <img style="margin: 0; width: 100%; height: auto" src="figures/egmResult.gif">
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >Uncertainty is meaningfully related to the observation method.</figcaption>
         </figure>
-
-        <p>Better to capture 'the truth' by assigning a larger uncertainty than to be confident and wrong.</p>
 
     </section>
     <!--}}}-->
 
     <!--{{{ Not on mesh -->
     <section>
-        <h3>Project to mesh</h3>
+        <h3>Position uncertainty</h3>
+
+        <p>
+            Asign measurements to finite element model
+            <br>
+            Larger projections have larger uncertainties
+        </p>
 
         <figure>
             <img style="margin: 0; width: 50%; height: auto" src="figures/meshProject.png">
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >Project observations to nearest mesh vertex.</figcaption>
+            <figcaption style="line-height: 1.0; font-size: 0.75em" >Project observations to nearest mesh vertex</figcaption>
         </figure>
 
     </section>
@@ -146,7 +284,7 @@
 
         <div>
             \[\begin{equation}
-                LAT_{measured} = LAT_{true} + \epsilon \\
+                LAT_{obs} = LAT_{true} + \epsilon \\
                 \epsilon \sim \mathcal{N}(0, \sigma^2) \\
                 \sigma^2 = \sigma_{electrogram}^2 + \sigma_{position}^2 
             \end{equation}\]
@@ -154,24 +292,8 @@
 
         <figure>
             <img style="margin: 0; width: 25%; height: auto" src="figures/meshgif1.png">
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >LAT observations assigned to mesh.</figcaption>
+            <figcaption style="line-height: 1.0; font-size: 0.75em" >Uncertainty LAT observations assigned to mesh</figcaption>
         </figure>
-
-    </section>
-    <!--}}}-->
-
-</section>
-<!--}}}-->
-
-
-<!--{{{ GMRF : Gaussian Markov Random Field -->
-<section>
-
-    <!--{{{ intro what we want interpolation to do -->
-    <section>
-        <h2>Random fields on manifolds</h2>
-
-        <p>Gaussian Markov Random Fields</p>
 
     </section>
     <!--}}}-->
@@ -179,6 +301,12 @@
     <!--{{{ Bayesian model -->
     <section>
         <h3>Gaussian Markov Random Field</h3>
+
+        <p>
+            Model LAT <i>field</i> using GMRF $g(\cdot)$
+            <br>
+            Find LAT posterior distribution at every vertex
+        </p>
 
         <div>
         \[\begin{gather}
@@ -191,16 +319,18 @@
         \end{gather}\]
         </div>
 
+        <!--
         <br>
         <ul>
             <li>LAT <i>observations</i> are $y_i$</li>
-            <li>These observations are <i>noisy</i></li>
+            <li>LAT <i></i> are $u_i$</li>
             <li>Need to infer $LAT_{true} \equiv \mu_i$</li>
         </ul>
 
         <small>
         <p>$g(\cdot)$ is the Gaussian Markov Random Field, defined at every vertex of the atrial mesh</p>
         </small>
+        -->
 
     </section>
     <!--}}}-->
@@ -217,23 +347,6 @@
     </section>
     <!--}}}-->
 
-    <!--{{{ LAT samples are discontinuous -->
-    <section>
-        <h3>LAT maps: posterior samples</h3>
-
-        <p>The GMRF LAT map is a distribution.<br>Therefore we can take samples.</p>
-
-        
-        <figure>
-            <img style="margin: 0; width: 50%; height: auto" src="figures/samples.gif">
-            <figcaption style="line-height: 0.75; font-size: 0.75em" >Mean is smooth but samples are rough</figcaption>
-        </figure>
-
-        <p>The samples do not look like valid activation patterns</p>
-
-    </section>
-    <!--}}}-->
-
 </section>
 <!---}}}-->
 
@@ -245,29 +358,51 @@
     <section>
         <h2>Random fields on manifolds</h2>
 
+        <h4>Part 2</h4>
+
         <p>Gaussian process kernels on manifolds</p>
+
+    </section>
+    <!--}}}-->
+
+    <!--{{{ LAT samples are discontinuous -->
+    <section>
+        <h3>LAT maps: GMRF posterior samples</h3>
+
+        <p>The GMRF LAT map is a distribution.<br>Therefore we can take samples.</p>
+
+        
+        <figure>
+            <img style="margin: 0; width: 50%; height: auto" src="figures/samples.gif">
+            <figcaption style="line-height: 0.75; font-size: 0.75em" >Mean is smooth but samples are rough</figcaption>
+        </figure>
+
+        <!--
+        <p>The samples do not look like valid activation patterns</p>
+        -->
 
     </section>
     <!--}}}-->
 
     <!--{{{ Generalizing Gaussian processes on a manifold -->
     <section>
-        <h3>Generalizing Gaussian process interpolation on a manifold</h3>
+        <h3>Generalizing Gaussian processes on manifolds</h3>
 
         <div>
+        <p>Linear approximation of Gaussian process</p>
         \[\begin{gather}
-          \tilde{f}(\mathbf{x}) = \sum_{k=1}^M f_k \phi_k(\mathbf{x}) \quad \mbox{ where } \quad f_k \sim N(0, S(\sqrt{\lambda_k})),
-        \end{gather}\]
-        </div>
-        
-        <div>
-        \[\begin{gather}
+          \tilde{f}(\mathbf{x}) = \sum_{k=1}^M f_k \phi_k(\mathbf{x}) \quad \mbox{ where } \quad f_k \sim N(0, S(\sqrt{\lambda_k})), \\
         \mathbb{C}\operatorname{ov}(\tilde{f}(\mathbf{x_i}), \tilde{f}(\mathbf{x_j})) = \sum_{k=1}^{M} S(\sqrt{\lambda_k}) \phi_k(\mathbf{x_i}) \phi_k(\mathbf{x_j}). 
         \end{gather}\]
         </div>
 
         <small>
-        <p>$S$ is the Spectral Density of a covariance function; $\phi_k$ are Laplacian eigenvectors</p>
+        <p>
+            $S$ : spectral density of (chosen) covariance function
+            <br>
+            $\phi_k$ : Laplacian eigenvectors on manifold 
+        </p>
+
         </small>
 
     </section>
@@ -277,11 +412,13 @@
     <section>
         <h3>Laplacian eigenbasis</h3>
 
+        <p>Eigen-vectors/-values of Laplace-Beltrami operator</p>
+
         <center>
         <video autoplay="true" loop="true" muted="true" width="480">
            <source src="figures/basis.mp4" type="video/mp4"> Your browser does not support the video tag.
         </video>
-        <figcaption style="line-height: 1.0; font-size: 0.75em" >Visualization of basis</figcaption>
+        <figcaption style="line-height: 1.0; font-size: 0.75em" >Visualization of Laplacian eigenvectors</figcaption>
         </center>
 
     </section>
@@ -293,7 +430,7 @@
 
         <figure>
             <img style="margin: 0; width: 60%; height: auto" src="figures/extension_small.png">
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >I wrote custom remeshing tools to extend the mesh</figcaption>
+            <figcaption style="line-height: 1.0; font-size: 0.75em" >Custom remeshing tools to extend mesh</figcaption>
         </figure>
 
     </section>
@@ -305,7 +442,7 @@
 
         <figure>
             <img style="margin: 0; width: 60%; height: auto" src="figures/annealed_decimation.png">
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >I wrote custom remeshing tools to reduce the simulation mesh size</figcaption>
+            <figcaption style="line-height: 1.0; font-size: 0.75em" >Custom remeshing tools to reduce mesh</figcaption>
         </figure>
 
     </section>
@@ -313,7 +450,7 @@
 
     <!--{{{ LAT plots -->
     <section>
-        <h3>Uncertain scalar field</h3>
+        <h3>Posterior distrib. of function + gradient</h3>
 
         <center>
         <video autoplay="true" loop="true" muted="true" width="420">
@@ -328,93 +465,16 @@
     </section>
     <!--}}}-->
 
-</section>
-<!--}}}-->
-
-
-<!--{{{ Emulation of expensive simulations -->
-<section>
-
-    <!--{{{ Section title -->
-    <section>
-        <h2>Emulators of expensive simulations</h2>
-
-        <p>Learning the map from simulator inputs to outputs</p>
-
-    </section>
-    <!--}}}-->
-
-    <!--{{{ Emulators for fitting cell models -->
-    <section>
-        <h3>Emulators for fitting cell models</h3>
-
-        Used Matlab simulations of action potential from the CellML project.
-
-        Emulated features of action potential as a function of parameters with Gaussian processes.
-           
-        <figure>
-            <img style="margin: 0; width: 45%; height: auto; float: left" src="figures/impsAP.png">
-            <img style="margin: 0; width: 44%; height: auto; float: right" src="figures/matchAP.png">
-            <!-- <figcaption style="line-height: 1.0; font-size: 0.75em" >Application of Uncertainty Quantification to cardiac cell models</figcaption> -->
-        </figure>
-
-    </section>
-    <!--}}}-->
-
-    <!--{{{ RCE Surrogates: PCA-->
-    <section>
-        <h3>RCE: restitution curve emulators</h3>
-
-        Wrote simulations with openCARP (Cardiac Electrophysiology Simulator), 
-        used PCA + GPs from relatively few simulations to predict Restitution curves directly from parameters (no need to run simulation).
-
-        <figure>
-            <img style="margin: 0; width: 50%; height: auto; float: left" src="figures/restitution_curves.jpg">
-            <img style="margin: 0; width: 45%; height: auto; float: right" src="figures/RC_PCA.jpg">
-        </figure>
-
-    </section>
-    <!--}}}-->
-
-    <!--{{{ RCE Surrogates: inference -->
-    <section>
-        <h3>RCE: restitution curve emulators</h3>
-
-        Bayesian Calibration of Electrophysiology Models Using Restitution Curve Emulators
-
-        Can do inference without having to run simulations.
-
-        <figure>
-            <img style="margin: 0; width: 55%; height: auto; float: left" src="figures/RCE_samples.jpg">
-            <img style="margin: 0; width: 40%; height: auto; float: right" src="figures/RCE_posterior.jpg">
-        </figure>
-
-    </section>
-    <!--}}}-->
-
-    <!--{{{ ERP Surrogate -->
-    <section>
-        <h3>Use emulators to discover new protocols</h3>
-        <!-- <h3>Calibrating cardiac electrophysiology models using latent Gaussian processes on atrial manifolds</h3> -->
-
-        <figure>
-            <img style="margin: 0; width: 60%; height: auto" src="figures/ERP_sensitivity.png">
-            <img style="margin: 0; width: 60%; height: auto" src="figures/ERP_surrogates.png">
-        </figure>
-
-    </section>
-    <!--}}}-->
-
     <!--{{{ ERP surrogate + Latent GPs -->
     <section>
         <h3>Latent Gaussian processes on atrial manifolds</h3>
 
-        Build emulators linking parameters to observables.
-        </br>
-        Infer parameter fields without any more simulations.
+        <small>
+            Emulators + GP priors on parameters: simulation-free inference with UQ
+        </small>
 
         <figure>
-            <img style="margin: 0; width: 40%; height: auto" src="figures/ERP_flowchart.png">
+            <img style="margin: 0; width: 45%; height: auto" src="figures/ERP_flowchart.png">
             <!-- <figcaption style="line-height: 1.0; font-size: 0.75em">ERP emulator + GPMI prior for parameter fields.</figcaption> -->
         </figure>
 
@@ -480,19 +540,6 @@
         <figure>
             <img style="margin: 0; width: 70%; height: auto" src="figures/design_cdti.jpeg">
             <!-- <figcaption style="line-height: 1.0; font-size: 0.75em">ERP emulator + GPMI prior for parameter fields.</figcaption> -->
-        </figure>
-
-    </section>
-    <!--}}}-->
-
-    <!--{{{ Optimizing acquisition parameters -->
-    <section>
-        <h3>CDTI experiment design</h3>
-
-        <figure>
-            <img style="margin: 0; width: 37%; height: auto; float: center" src="figures/muell4a.png">
-            <img style="margin: 0; width: 38%; height: auto; float: center" src="figures/muell4b.png">
-            <figcaption>Building error surfaces over acquision parameters</figcaption>
         </figure>
 
     </section>
