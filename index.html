@@ -73,7 +73,7 @@
     </section>
     }}}-->
 
-    <!--{{{ Outline -->
+    <!--{{{ Outline
     <section>
         <h3>Outline</h3>
            
@@ -88,15 +88,13 @@
             <li>Cardiac Diffusion Tensor Imaging</li>
         </ol>
 
-    <!--
     <p>
         <br>
         (Work not necessarily performed in this order)
     </p>
-    -->
 
     </section>
-    <!--}}}-->
+    -->
 
 </section>
 <!--}}}-->
@@ -107,23 +105,23 @@
 
     <!--{{{ Section title -->
     <section>
-        <h2>Emulators of expensive simulations</h2>
+        <h2>Emulators / Surrogate Models</h2>
 
         <p>Learn mappings from simulator inputs to outputs</p>
+
+        <p>Applied to cardiac electrophysiology simulations</p>
 
     </section>
     <!--}}}-->
 
     <!--{{{ Emulators for fitting cell models -->
     <section>
-        <h3>Emulators for fitting cell models</h3>
+        <h3>Emulators of cardiac action potential</h3>
 
         <p>
-            Simulations of cardiac action potentials (APs)
+            INPUTS: parameters; OUTPUTS: action potential
             <br>
             Gaussian process emulators
-            <br>
-            INPUTS: parameters; OUTPUTS: AP features
         </p>
            
         <figure>
@@ -137,14 +135,12 @@
 
     <!--{{{ RCE Surrogates: PCA-->
     <section>
-        <h3>RCE: restitution curve emulators</h3>
+        <h3>Emulators of cardiac restitution curves</h3>
 
         <p>
-            Resitution curve simulations with openCARP
+            INPUTS: parameters; OUTPUTS: restitution curves
             <br>
             PCA + GPs: multi-output emulators
-            <br>
-            INPUTS: parameters; OUTPUTS: restitution curves
         </p>
 
         <figure>
@@ -157,12 +153,12 @@
 
     <!--{{{ RCE Surrogates: inference -->
     <section>
-        <h3>RCE: restitution curve emulators</h3>
+        <h3>Bayesian Calibration with emulators</h3>
 
         <p>
-            Bayesian Calibration with emulators
-            <br>
             Inference with no extra simulations
+            <br>
+            Obtain posterior distribution of parameters
         </p>
 
         <figure>
@@ -210,89 +206,14 @@
     </section>
     <!--}}}-->
 
-    <!--{{{ EGMs + mesh: measurements-->
-    <section>
-        <h3>Catheter Measurements</h3>
-
-        <p>
-            Measure electrograms (voltage-time) in left atrium
-            <br>
-            Determine Local Activation Time (LAT)
-            <br>
-            (time of arrival of electrical wavefront)
-        </p>
-
-        <figure>
-            <img style="margin: 0; width: 80%; height: auto" src="figures/egm+mesh.png">
-            <!--
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >Measure <b>electrograms</b> (voltage vs. time) across the left atrium</br>Determine <b>Local Activation Time (LAT)</b></figcaption>
-            -->
-        </figure>
-
-    </section>
-    <!--}}}-->
-
     <!--{{{ EGMs + mesh: what we want-->
     <section>
 
-        <h3>Interpolate LAT</h3>
+        <h3>Probabilistic Interpolation on manifolds</h3>
 
         <figure>
             <img style="margin: 0; width: 50%; height: auto" src="figures/meshgif.gif">
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >With enough LAT measurements, we could construct a LAT map.</figcaption>
-        </figure>
-
-    </section>
-    <!--}}}-->
-
-    <!--{{{ Electrogram analysis summary gif -->
-    <section>
-        <h3>LAT Uncertainty</h3>
-    
-        <p>
-            Method to assign error variance for LAT
-        </p>
-
-        <figure>
-            <img style="margin: 0; width: 100%; height: auto" src="figures/egmResult.gif">
-        </figure>
-
-    </section>
-    <!--}}}-->
-
-    <!--{{{ Not on mesh -->
-    <section>
-        <h3>Position uncertainty</h3>
-
-        <p>
-            Asign measurements to finite element model
-            <br>
-            Larger projections have larger uncertainties
-        </p>
-
-        <figure>
-            <img style="margin: 0; width: 50%; height: auto" src="figures/meshProject.png">
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >Project observations to nearest mesh vertex</figcaption>
-        </figure>
-
-    </section>
-    <!--}}}-->
-
-    <!--{{{ combine UQs -->
-    <section>
-        <h3>Combine Errors</h3>
-
-        <div>
-            \[\begin{equation}
-                LAT_{obs} = LAT_{true} + \epsilon \\
-                \epsilon \sim \mathcal{N}(0, \sigma^2) \\
-                \sigma^2 = \sigma_{electrogram}^2 + \sigma_{position}^2 
-            \end{equation}\]
-        </div>
-
-        <figure>
-            <img style="margin: 0; width: 25%; height: auto" src="figures/meshgif1.png">
-            <figcaption style="line-height: 1.0; font-size: 0.75em" >Uncertain LATs assigned to mesh</figcaption>
+            <figcaption style="line-height: 1.0; font-size: 0.75em" >Infer posterior distribution of random field from data</figcaption>
         </figure>
 
     </section>
@@ -303,9 +224,9 @@
         <h3>Gaussian Markov Random Field</h3>
 
         <p>
-            Model LAT <i>field</i> using GMRF $g(\cdot)$
+            Model prior distribution of <i>field</i> as GMRF
             <br>
-            Find LAT posterior distribution at every vertex
+            Find posterior distribution of field given data $y_i(x_i)$
         </p>
 
         <div>
@@ -335,6 +256,83 @@
     </section>
     <!--}}}-->
 
+    <!--{{{ EGMs + mesh: measurements-->
+    <section>
+        <h3>Uncertain observations on left atrium</h3>
+
+        <p>
+            <!--
+            Measure electrograms (voltage-time) in left atrium
+            <br>
+            -->
+            Local Activation Time (LAT)
+            <br>
+            (time of arrival of electrical wavefront)
+        </p>
+
+        <figure>
+            <img style="margin: 0; width: 80%; height: auto" src="figures/egm+mesh.png">
+            <!--
+            <figcaption style="line-height: 1.0; font-size: 0.75em" >Measure <b>electrograms</b> (voltage vs. time) across the left atrium</br>Determine <b>Local Activation Time (LAT)</b></figcaption>
+            -->
+        </figure>
+
+    </section>
+    <!--}}}-->
+
+    <!--{{{ Electrogram analysis summary gif
+    <section>
+        <h3>LAT Uncertainty</h3>
+    
+        <p>
+            Method to assign error variance for LAT
+        </p>
+
+        <figure>
+            <img style="margin: 0; width: 100%; height: auto" src="figures/egmResult.gif">
+        </figure>
+
+    </section>
+    }}}-->
+
+    <!--{{{ Not on mesh
+    <section>
+        <h3>Position uncertainty</h3>
+
+        <p>
+            Asign measurements to finite element model
+            <br>
+            Larger projections have larger uncertainties
+        </p>
+
+        <figure>
+            <img style="margin: 0; width: 50%; height: auto" src="figures/meshProject.png">
+            <figcaption style="line-height: 1.0; font-size: 0.75em" >Project observations to nearest mesh vertex</figcaption>
+        </figure>
+
+    </section>
+    }}}-->
+
+    <!--{{{ combine UQs
+    <section>
+        <h3>Combine Errors</h3>
+
+        <div>
+            \[\begin{equation}
+                LAT_{obs} = LAT_{true} + \epsilon \\
+                \epsilon \sim \mathcal{N}(0, \sigma^2) \\
+                \sigma^2 = \sigma_{electrogram}^2 + \sigma_{position}^2 
+            \end{equation}\]
+        </div>
+
+        <figure>
+            <img style="margin: 0; width: 25%; height: auto" src="figures/meshgif1.png">
+            <figcaption style="line-height: 1.0; font-size: 0.75em" >Uncertain LATs assigned to mesh</figcaption>
+        </figure>
+
+    </section>
+    }}}-->
+
     <!--{{{ Bayesian model paper -->
     <section>
         <h3>Posterior distribution of Local Activation Time</h3>
@@ -342,6 +340,7 @@
         <figure>
             <img style="margin: 0; width: 37%; height: auto; float: center" src="figures/meanAll.png">
             <img style="margin: 0; width: 38%; height: auto; float: center" src="figures/sigmaAll.png">
+            <figcaption style="line-height: 0.75; font-size: 0.75em" >Color = observation value; Size = observation uncertainty</figcaption>
         </figure>
 
     </section>
@@ -533,7 +532,7 @@
     </section>
     <!--}}}-->
 
-    <!--{{{ optimal CDTI design -->
+    <!--{{{ optimal CDTI design
     <section>
         <h3>Bias and Variance of CDTI parameter estimation</h3>
 
@@ -543,7 +542,7 @@
         </figure>
 
     </section>
-    <!--}}}-->
+    }}}-->
 
     <!--{{{ UQ CDTI -->
     <section>
